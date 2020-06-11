@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Update Stock</title>
+  </head>
+  <body>
+    <h1>Enter the information to update the Stock</h1>
+    <form action="updateStock" method="post">
+      <select name="hospital" placeholder="Hospital">
+        <option selected disabled>Choose Hospital</option>
+        <% results.forEach((result) => { %>
+        <option><%= JSON.stringify(result.name + ', ' + result.city + ', ' + result.pin)%></option><br>
+        <% }); %>
+      </select>
+
+      <br>
+
+      <select name="bloodgroup" placeholder="Blood Group">
+        <option selected disabled>Choose the blood group</option>
+        <option>AB+</option>
+        <option>AB-</option>
+        <option>A+</option>
+        <option>A-</option>
+        <option>B+</option>
+        <option>B-</option>
+        <option>O+</option>
+        <option>O-</option>
+      </select>
+      <br>
+      Units Used :
+      <input type="text" name="units" placeholder="Units Used">
+      <br>
+      <input type="submit" value="Submit" onclick="alert('Information recieved!')">
+    </form>
+  </body>
+</html>

@@ -221,9 +221,17 @@ app.post("/updateStock", (req, res) => {
     let bg = req.body.bloodgroup;
     sql = `SELECT id from blood where type = '${bg}'`;
     db.query(sql, (err,bloodID) => {
-
-    })
-  })
+      if(err) throw err;
+      sql = `UPDATE stock SET units = units - ${req.body.units} WHERE blood_id =${bloodID[0].id} and hospital_id = ${hosID[0].id}`;
+      console.log(sql);
+      db.query(sql, (err, result) => {
+        if(err) {
+          console.log(err);
+        };
+        console.log(result);
+      });
+    });
+  });
 });
 
 app.listen(3000, () => {

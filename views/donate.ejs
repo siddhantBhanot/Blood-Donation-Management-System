@@ -11,7 +11,7 @@
   Donor ID <br>
   <form action="donate" method="post"> <br>
     <input type="text" name="id" placeholder="Donor ID"> <br>
-      <select  name="hospital" placeholder='Hospital'>
+    <select name="hospital" placeholder='Hospital'>
       <option selected disabled>Choose Hospital</option>
       <% results.forEach((result) => { %>
       <option><%= JSON.stringify(result.name + ', ' + result.city + ', ' + result.pin)%></option><br>

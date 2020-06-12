@@ -198,7 +198,7 @@ app.get('/stock', (req, res) => {
 });
 
 app.get('/viewStock', (req, res) => {
-  sql = 'SELECT type,units AS Units, hospital.name FROM (blood INNER JOIN stock ON(blood.id=stock.blood_id)) INNER JOIN hospital ON (stock.hospital_id=hospital.id) GROUP BY hospital.name,blood.type';
+  sql = 'SELECT type,units AS Units, hospital.name FROM (blood INNER JOIN stock ON(blood.id=stock.blood_id)) INNER JOIN hospital ON (stock.hospital_id=hospital.id) WHERE Units>0 GROUP BY hospital.name,blood.type';
   db.query(sql,(err,results) => {
     results.forEach((result) => {})
     res.render('viewStock', {results,results});

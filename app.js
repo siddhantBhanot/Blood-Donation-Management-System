@@ -47,7 +47,7 @@ app.get("/continue", (req, res) => {
     console.log('blood table created');
   });
 
-  sql = 'CREATE TABLE IF NOT EXISTS donor (id int AUTO_INCREMENT, fname VARCHAR(255), lname VARCHAR(255), mobile VARCHAR(255),blood_id int, PRIMARY KEY(id),FOREIGN KEY(blood_id) REFERENCES blood(id) )';
+  sql = 'CREATE TABLE IF NOT EXISTS donor (id int AUTO_INCREMENT, fname VARCHAR(255), lname VARCHAR(255), mobile VARCHAR(255),blood_id int, PRIMARY KEY(id),FOREIGN KEY(blood_id) REFERENCES blood(id))';
   db.query(sql, (err, result) => {
     if (err) throw err;
     console.log('donor table created');
@@ -172,7 +172,7 @@ app.post('/donate', (req, res) => {
       db.query(sql,(err,result) => {
         console.log(result);
         if(Array.isArray(result) && result.length){
-          console.log("exists");
+          // EXISTS
           sql = `INSERT INTO stock(id, blood_id, hospital_id) VALUES(${result[0].id},${bloodID[0].blood_id},${hosID[0].id}) ON DUPLICATE KEY UPDATE units = units+1`;
           db.query(sql, (err,result) => {
             if(err) throw err;
@@ -180,7 +180,7 @@ app.post('/donate', (req, res) => {
           });
         }
         else {
-          console.log("NOT EXISTS");
+          // NOT EXISTS
           let post = {blood_id:bloodID[0].blood_id, hospital_id:hosID[0].id,units:1};
           sql = "INSERT INTO stock SET ?";
           db.query(sql, post, (err,result) => {
